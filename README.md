@@ -1,1 +1,2 @@
-# CloudPoint_Grid_Cutting
+# PointCloudGridCutting
+

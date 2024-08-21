@@ -6,6 +6,13 @@ import open3d as o3d
 
 class CloudPointGridCutting:
     def __init__(self, x_block : int, y_block : int, point_cloud: o3d.geometry.PointCloud, output_path : string = None ):
+        """
+        This class is used to cut the point cloud into x_block * y_block blocks
+        :param x_block: number of blocks in x direction
+        :param y_block: number of blocks in y direction
+        :param point_cloud: input point cloud
+        :param output_path: output path
+        """
         self.x_block = x_block
         self.y_block = y_block
         self.point_cloud = point_cloud
@@ -13,6 +20,10 @@ class CloudPointGridCutting:
         self.output = [ [] for i in range (self.y_block)]
 
     def grid_cutting(self):
+        """
+        Cut the point cloud into x_block * y_block blocks
+        :return: x_block * y_block blocks
+        """
         xyz = np.array(self.point_cloud.points)
         colors = np.array(self.point_cloud.colors)
 
@@ -40,6 +51,10 @@ class CloudPointGridCutting:
         return self.output
 
     def output_files(self):
+        """
+        Output the point cloud blocks to the output path
+        :return: if you did not set the output path, it will print "Output path is not set"
+        """
         if self.output_path is None:
             print("Output path is not set")
             return
