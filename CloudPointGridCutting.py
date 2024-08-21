@@ -11,7 +11,7 @@ class CloudPointGridCutting:
         :param x_block: number of blocks in x direction
         :param y_block: number of blocks in y direction
         :param point_cloud: input point cloud
-        :param output_path: output path
+        :param output_path: output path （default is None）
         """
         self.x_block = x_block
         self.y_block = y_block
