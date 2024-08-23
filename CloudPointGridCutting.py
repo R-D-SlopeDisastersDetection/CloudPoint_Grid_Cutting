@@ -27,14 +27,14 @@ class CloudPointGridCutting:
         xyz = np.array(self.point_cloud.points)
         colors = np.array(self.point_cloud.colors)
 
-        x_min = int(xyz[:, 0].min())
-        x_max = math.ceil(xyz[:, 0].max())
-        y_min = int(xyz[:, 1].min())
-        y_max = math.ceil(xyz[:, 1].max())
+        x_min = xyz[:, 0].min()
+        x_max = xyz[:, 0].max()
+        y_min = xyz[:, 1].min()
+        y_max = xyz[:, 1].max()
 
         lis = [ [ [] for i in range (self.x_block)] for j in range (self.y_block)]
-        x_tmp = (x_max - x_min) / self.x_block + 1
-        y_tmp = (y_max - y_min) / self.y_block + 1
+        x_tmp = (x_max - x_min) / self.x_block
+        y_tmp = (y_max - y_min) / self.y_block
 
         for i in range(len(xyz)):
             x = int((xyz[i][0] - x_min) / x_tmp)
