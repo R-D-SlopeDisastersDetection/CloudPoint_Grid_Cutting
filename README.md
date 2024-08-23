@@ -16,11 +16,13 @@ open3d = 0.8.0
         :param y_block: number of blocks in y direction
         :param point_cloud: input point cloud
         :param output_path: output path (optional)
+        :param output_file_type: output file type （default is ".ply"）
 ~~~
 - `x_block` : 网格的x方向的个数
 - `y_block` : 网格的y方向的个数
 - `point_cloud` : 输入的点云
 - `output_path` : 输出的路径(可选)
+- `output_file_type` : 输出的文件类型（默认为".ply"）
 
 ## 3. 使用方法
 ~~~
