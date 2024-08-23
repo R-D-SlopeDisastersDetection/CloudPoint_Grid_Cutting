@@ -39,6 +39,10 @@ class CloudPointGridCutting:
         for i in range(len(xyz)):
             x = int((xyz[i][0] - x_min) / x_tmp)
             y = int((xyz[i][1] - y_min) / y_tmp)
+            if x == self.x_block:
+                x -= 1
+            if y == self.y_block:
+                y -= 1
             lis[y][x].append(i)
 
         for i in range (self.y_block):
