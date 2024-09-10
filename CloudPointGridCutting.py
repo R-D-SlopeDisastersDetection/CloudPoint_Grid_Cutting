@@ -19,8 +19,8 @@ class CloudPointGridCutting:
         self.y_num = y_num
         self.point_cloud = point_cloud
         self.output_path = output_path
-        self.output = [[] for i in range (self.y_num)]
         self.output_file_type = output_file_type
+        self.output = []
         self.cut_type = cut_type
 
     def grid_cutting(self):
@@ -35,6 +35,8 @@ class CloudPointGridCutting:
         Cut the point cloud into x_block * y_block blocks
         :return: x_block * y_block blocks, y_blocks_num, x_blocks_num
         """
+        self.output = [[] for i in range(self.y_num)]
+
         xyz = np.array(self.point_cloud.points)
         colors = np.array(self.point_cloud.colors)
 
@@ -81,7 +83,8 @@ class CloudPointGridCutting:
         x_blocks_num = math.ceil((x_max - x_min) / self.x_num)
         y_blocks_num = math.ceil((y_max - y_min) / self.y_num)
 
-        lis = [[[] for i in range(self.x_num)] for j in range(self.y_num)]
+        lis = [[[] for i in range(x_blocks_num)] for j in range(y_blocks_num)]
+        self.output = [[] for i in range(y_blocks_num)]
 
         for i in range(len(xyz)):
             x = int((xyz[i][0] - x_min) / x_blocks_num)
