@@ -35,7 +35,7 @@ if __name__ == '__main__':
     point_cloud = o3d.io.read_point_cloud("data/bunny.ply")
     x_block = 4
     y_block = 4
-    cloud_point_grid_cutting = CloudPointGridCutting(x_block, y_block, point_cloud, 'output')
+    cloud_point_grid_cutting = CloudPointGridCutting(x_block, y_block, point_cloud, 'output', cut_type='block_size')
     blocks = cloud_point_grid_cutting.grid_cutting()
     cloud_point_grid_cutting.output_files()
 ~~~
