@@ -4,8 +4,10 @@ import string
 import numpy as np
 import open3d as o3d
 
+
 class CloudPointGridCutting:
-    def __init__(self, x_block : int, y_block : int, point_cloud: o3d.geometry.PointCloud, output_path : string = None, output_file_type : string = ".ply" ):
+    def __init__(self, x_block: int, y_block: int, point_cloud: o3d.geometry.PointCloud, output_path: string = None,
+                 output_file_type: string = ".ply"):
         """
         This class is used to cut the point cloud into x_block * y_block blocks
         :param x_block: number of blocks in x direction
@@ -18,7 +20,7 @@ class CloudPointGridCutting:
         self.y_block = y_block
         self.point_cloud = point_cloud
         self.output_path = output_path
-        self.output = [ [] for i in range (self.y_block)]
+        self.output = [[] for i in range(self.y_block)]
         self.output_file_type = output_file_type
 
     def grid_cutting(self):
@@ -34,7 +36,7 @@ class CloudPointGridCutting:
         y_min = xyz[:, 1].min()
         y_max = xyz[:, 1].max()
 
-        lis = [ [ [] for i in range (self.x_block)] for j in range (self.y_block)]
+        lis = [[[] for i in range(self.x_block)] for j in range(self.y_block)]
         x_tmp = (x_max - x_min) / self.x_block
         y_tmp = (y_max - y_min) / self.y_block
 
@@ -47,8 +49,8 @@ class CloudPointGridCutting:
                 y -= 1
             lis[y][x].append(i)
 
-        for i in range (self.y_block):
-            for j in range (self.x_block):
+        for i in range(self.y_block):
+            for j in range(self.x_block):
                 pc_tmp = o3d.geometry.PointCloud()
                 pc_tmp.points = o3d.utility.Vector3dVector(xyz[lis[i][j]])
                 pc_tmp.colors = o3d.utility.Vector3dVector(colors[lis[i][j]])
@@ -64,23 +66,24 @@ class CloudPointGridCutting:
         if self.output_path is None:
             print("Output path is not set")
             return
-        for i in range (self.y_block):
-            for j in range (self.x_block):
+        for i in range(self.y_block):
+            for j in range(self.x_block):
                 if len(np.array(self.output[i][j].points)) == 0:
                     print("Waring: Block " + str(i) + " " + str(j) + " is empty")
                     continue
-                o3d.io.write_point_cloud(self.output_path + "/output_" + str(i) + "_" + str(j) + self.output_file_type, self.output[i][j])
+                o3d.io.write_point_cloud(self.output_path + "/output_" + str(i) + "_" + str(j) + self.output_file_type,
+                                         self.output[i][j])
 
     def get_x_block(self):
         return self.x_block
 
-    def set_x_block(self, x_block : int):
+    def set_x_block(self, x_block: int):
         self.x_block = x_block
 
     def get_y_block(self):
         return self.y_block
 
-    def set_y_block(self, y_block : int):
+    def set_y_block(self, y_block: int):
         self.y_block = y_block
 
     def get_point_cloud(self):
@@ -92,10 +95,8 @@ class CloudPointGridCutting:
     def get_output_path(self):
         return self.output_path
 
-    def set_output_path(self, output_path : string):
+    def set_output_path(self, output_path: string):
         self.output_path = output_path
 
     def get_output(self):
         return self.output
-
-
